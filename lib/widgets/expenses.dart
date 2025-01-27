@@ -41,13 +41,46 @@ class _ExpensesState extends State<Expenses> {
     });
   }
 
+  void _removeExpense(Expense expense) {
+    final expenseIndex = _registeredExpenses.indexOf(expense);
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text("Expense Deleted"),
+        duration: const Duration(seconds: 3),
+        action: SnackBarAction(
+            label: "Undo",
+            onPressed: () {
+              setState(() {
+                _registeredExpenses.insert(expenseIndex, expense);
+              });
+            }),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget mainWidget = const Center(
+      child: Text("No existing expenses, Try and add some !"),
+    );
+    if (_registeredExpenses.isNotEmpty) {
+      mainWidget = ExpensesList(
+        expenses: _registeredExpenses,
+        onRemoveExpense: _removeExpense,
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           "Flutter Expense Tracker",
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(
+            fontSize: 18,
+            color: Color.fromARGB(213, 219, 231, 225),
+          ),
         ),
         actions: [
           IconButton(
@@ -60,11 +93,8 @@ class _ExpensesState extends State<Expenses> {
         children: [
           const Text("Chart place holder ..."),
           Expanded(
-            //We covered it with expanded because without it, we have a column inside a column and its not being displayed properly
-            child: ExpensesList(
-              expenses: _registeredExpenses,
-            ),
-          ),
+              //We covered it with expanded because without it, we have a column inside a column and its not being displayed properly
+              child: mainWidget),
         ],
       ),
     );
