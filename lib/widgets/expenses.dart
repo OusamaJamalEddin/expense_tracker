@@ -1,3 +1,4 @@
+import 'package:expense_tracker/widgets/chart/chart.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
@@ -64,8 +65,11 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
-    Widget mainWidget = const Center(
-      child: Text("No existing expenses, Try and add some !"),
+    Widget mainWidget = Center(
+      child: Text(
+        "No existing expenses, Try and add some !",
+        style: TextStyle(color: Theme.of(context).textTheme.titleLarge!.color),
+      ),
     );
     if (_registeredExpenses.isNotEmpty) {
       mainWidget = ExpensesList(
@@ -91,7 +95,10 @@ class _ExpensesState extends State<Expenses> {
       ),
       body: Column(
         children: [
-          const Text("Chart place holder ..."),
+          const SizedBox(
+            height: 8,
+          ),
+          Chart(expenses: _registeredExpenses),
           Expanded(
               //We covered it with expanded because without it, we have a column inside a column and its not being displayed properly
               child: mainWidget),
