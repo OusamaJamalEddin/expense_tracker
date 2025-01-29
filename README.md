@@ -23,7 +23,19 @@ A simple and intuitive **Expense Tracker** built with Flutter. This frontend app
 
 ## 📸 Screenshots
 
-SOON.....
+-Darkmode OFF
+![Screenshot 1](assets/screenshots/Screenshot_1738170652.png)
+![Screenshot 2](assets/screenshots/Screenshot_1738170655.png)
+![Screenshot 3](assets/screenshots/Screenshot_1738170659.png)
+![Screenshot 4](assets/screenshots/Screenshot_1738170665.png)
+![Screenshot 5](assets/screenshots/Screenshot_1738170684.png)
+![Screenshot 6](assets/screenshots/Screenshot_1738170691.png)
+- Darkmode ON
+![Screenshot 7](assets/screenshots/Screenshot_1738170461.png)
+![Screenshot 8](assets/screenshots/Screenshot_1738170616.png)
+![Screenshot 9](assets/screenshots/Screenshot_1738170623.png)
+
+
 
 ## 🚀 Getting Started
 
