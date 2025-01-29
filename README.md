@@ -49,11 +49,19 @@ You need to have VS Code or any other IDE installed, along with Flutter itself. 
 ## 🏗 Project Structure
 ```
 /lib
-  ├── main.dart  // Entry point
-  ├── screens/   // Screens & UI components
-  ├── widgets/   // Reusable UI components
-  ├── models/    // Data models
-  ├── providers/ // State management
+  ├── main.dart              // Entry point of the application
+  ├── models/                // Data models
+  │   ├── expense.dart       
+  ├── widgets/               // Reusable UI components
+  │   ├── chart/             // Expense chart components
+  │   │   ├── chart_bar.dart
+  │   │   ├── chart.dart
+  │   ├── expenses_list/     // Expense list components
+  │   │   ├── expense_item.dart
+  │   │   ├── expenses_list.dart
+  │   ├── expenses.dart      // Expense management widget
+  │   ├── new_expense.dart   // Widget for adding a new expense (The overlay that pops up)
+
 ```
 
 ## 🤝 Contribution
