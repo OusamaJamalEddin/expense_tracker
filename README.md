@@ -71,6 +71,17 @@ You need to have VS Code or any other IDE installed, along with Flutter itself. 
 
 ```
 
+## ⛔ Troubleshooting
+
+1. Gradle Compatibility Issues
+Most of the issues i faced were gradle being Incompatible with Java or Android SDK.
+So make sure their versoins are up to date and compatible, Update Gradle version in android/build.gradle and run ./gradlew wrapper --gradle-version <compatible-version>.
+
+2. Other possible issues
+Old Plugins and SDK versions cause build errors.
+Solution: Run flutter upgrade to update Flutter and plugins. Update dependencies in android/build.gradle, then run flutter doctor to check for issues.
+
+
 ## 🤝 Contribution
 
 Contributions are welcome! Feel free to submit a PR or report issues.
