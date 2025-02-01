@@ -79,94 +79,106 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
-      child: Column(
-        children: [
-          TextField(
-            controller: _titleController,
-            maxLength: 50,
-            decoration: const InputDecoration(label: Text("Expense name")),
-          ),
-          Row(
+    final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
+    return SizedBox(
+      height: double.infinity,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(16, 48, 16, keyboardSpace + 16),
+          child: Column(
             children: [
-              Expanded(
-                child: TextField(
-                  controller: _amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                    prefixText: "\$ ",
-                    label: Text("Amount"),
-                  ),
+              TextField(
+                controller: _titleController,
+                maxLength: 50,
+                decoration: const InputDecoration(
+                  label: Text("Expense name"),
                 ),
               ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      _selectedDate == null
-                          ? "No selected Date"
-                          : formatter.format(_selectedDate!),
-                    ),
-                    IconButton(
-                        onPressed: () {
-                          _presentDatePicker();
-                        },
-                        icon: const Icon(Icons.calendar_month))
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Row(
-            children: [
-              DropdownButton(
-                value: _selectedCategory,
-                //Tranferring the Category enum values to a list of DropdownMenuItem variables,
-                // by using .map to iterate among each category i have in the enum Category,
-                //and then transferring it to a list at the end. -> .toList()
-                items: Category.values
-                    .map(
-                      (category) => DropdownMenuItem(
-                        value: category, //this is important, onChanged uses it!
-                        child: Text(
-                          category.name.toUpperCase(),
-                        ),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _amountController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        prefixText: "\$ ",
+                        label: Text("Amount"),
                       ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  //if no item is choosen, then dont do anything.
-                  if (value == null) {
-                    return;
-                  }
-                  //if an item has been selected, then assign it.
-                  setState(() {
-                    _selectedCategory = value;
-                  });
-                },
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          _selectedDate == null
+                              ? "No selected Date"
+                              : formatter.format(_selectedDate!),
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              _presentDatePicker();
+                            },
+                            icon: const Icon(Icons.calendar_month))
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              const Spacer(),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: TextButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(103, 244, 67, 54)),
-                child: const Text("Cancel"),
+              const SizedBox(
+                height: 16,
               ),
-              const SizedBox(width: 6),
-              ElevatedButton(
-                  onPressed: _submitData, child: const Text("Save Expense"))
+              Row(
+                children: [
+                  DropdownButton(
+                    value: _selectedCategory,
+                    //Tranferring the Category enum values to a list of DropdownMenuItem variables,
+                    // by using .map to iterate among each category i have in the enum Category,
+                    //and then transferring it to a list at the end. -> .toList()
+                    items: Category.values
+                        .map(
+                          (category) => DropdownMenuItem(
+                            value:
+                                category, //this is important, onChanged uses it!
+                            child: Text(
+                              category.name.toUpperCase(),
+                              style:
+                                  Theme.of(context).dropdownMenuTheme.textStyle,
+                            ),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) {
+                      //if no item is choosen, then dont do anything.
+                      if (value == null) {
+                        return;
+                      }
+                      //if an item has been selected, then assign it.
+                      setState(() {
+                        _selectedCategory = value;
+                      });
+                    },
+                  ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(103, 244, 67, 54),
+                    ),
+                    child: const Text("Cancel"),
+                  ),
+                  const SizedBox(width: 6),
+                  ElevatedButton(
+                      onPressed: _submitData, child: const Text("Save Expense"))
+                ],
+              )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }
