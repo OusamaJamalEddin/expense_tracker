@@ -53,18 +53,21 @@ class _ExpensesState extends State<Expenses> {
         content: const Text("Expense Deleted"),
         duration: const Duration(seconds: 3),
         action: SnackBarAction(
-            label: "Undo",
-            onPressed: () {
-              setState(() {
-                _registeredExpenses.insert(expenseIndex, expense);
-              });
-            }),
+          label: "Undo",
+          onPressed: () {
+            setState(() {
+              _registeredExpenses.insert(expenseIndex, expense);
+            });
+          },
+        ),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final heigth = MediaQuery.of(context).size.height;
     Widget mainWidget = Center(
       child: Text(
         "No existing expenses, Try and add some !",
@@ -93,17 +96,29 @@ class _ExpensesState extends State<Expenses> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 8,
-          ),
-          Chart(expenses: _registeredExpenses),
-          Expanded(
-              //We covered it with expanded because without it, we have a column inside a column and its not being displayed properly
-              child: mainWidget),
-        ],
-      ),
+      body: width <= 600
+          ? Column(
+              children: [
+                const SizedBox(
+                  height: 8,
+                ),
+                Chart(expenses: _registeredExpenses),
+                Expanded(
+                    //We covered it with expanded because without it, we have a column inside a column and its not being displayed properly
+                    child: mainWidget),
+              ],
+            )
+          : Row(
+              children: [
+                const SizedBox(
+                  height: 8,
+                ),
+                Expanded(child: Chart(expenses: _registeredExpenses)),
+                Expanded(
+                    //We covered it with expanded because without it, we have a column inside a column and its not being displayed properly
+                    child: mainWidget),
+              ],
+            ),
     );
   }
 }
