@@ -43,6 +43,13 @@ void main() {
                 color: Color.fromARGB(255, 216, 216, 216),
               ),
             ),
+        dropdownMenuTheme: const DropdownMenuThemeData().copyWith(
+          textStyle: TextStyle(
+            color: kDarkColorScheme.onPrimaryContainer,
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          ),
+        ),
       ),
 
       //we must use copyWith because without it, i will have to define all specifications of the themes, but with it, i am using the default things with overriding what i want to costumize
@@ -71,6 +78,16 @@ void main() {
               //i can override as well the margin from here of the cards
               horizontal: 10,
               vertical: 8),
+        ),
+        dropdownMenuTheme: const DropdownMenuThemeData().copyWith(
+          textStyle: TextStyle(
+            color: kColorScheme.primary,
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          ),
+          // menuStyle: const MenuStyle().copyWith(
+          //   backgroundColor: WidgetStatePropertyAll(kColorScheme.onPrimary),
+          // ),
         ),
       ),
       home: const Expenses(),

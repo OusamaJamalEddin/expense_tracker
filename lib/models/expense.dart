@@ -49,7 +49,7 @@ class Expense {
   final String title;
   final double amount;
   final DateTime date;
-  final Category category;
+  final Category? category;
 
   String get formattedDate {
     return formatter.format(date);
